@@ -1,6 +1,7 @@
 class Board:
     def __init__(self, board):
         self.board = board
+        self.i = 0
 
     def __str__(self):
         board_str = ''
@@ -45,9 +46,13 @@ class Board:
         if (next_empty := self.find_empty_cell()) is None:
             return True
         for guess in range(1, 10):
+            
+            self.i += 1
+            print(self.i)
             if self.is_valid(next_empty, guess):
                 row, col = next_empty
                 self.board[row][col] = guess
+
                 if self.solver():
                     return True
                 self.board[row][col] = 0
@@ -63,14 +68,14 @@ def solve_sudoku(board):
     return gameboard
 
 puzzle = [
-  [0, 0, 2, 0, 0, 8, 0, 0, 0],
-  [0, 0, 0, 0, 0, 3, 7, 6, 2],
-  [4, 3, 0, 0, 0, 0, 8, 0, 0],
-  [0, 5, 0, 0, 3, 0, 0, 9, 0],
-  [0, 4, 0, 0, 0, 0, 0, 2, 6],
-  [0, 0, 0, 4, 6, 7, 0, 0, 0],
-  [0, 8, 6, 7, 0, 4, 0, 0, 0],
-  [0, 0, 0, 5, 1, 9, 0, 0, 8],
-  [1, 7, 0, 0, 0, 6, 0, 0, 5]
+  [2, 0, 4, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 4, 5, 9, 1],
+  [0, 1, 0, 5, 0, 6, 0, 0, 2],
+  [0, 7, 0, 0, 0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 0, 0, 8, 5, 0],
+  [0, 0, 0, 0, 9, 1, 0, 7, 0],
+  [0, 4, 5, 0, 0, 0, 0, 0, 7],
+  [0, 0, 6, 8, 0, 0, 0, 0, 4],
+  [0, 0, 0, 0, 3, 0, 0, 2, 0]
 ]
 solve_sudoku(puzzle)
